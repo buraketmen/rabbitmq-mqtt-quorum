@@ -1,4 +1,4 @@
-FROM rabbitmq:3.9.15-management
+FROM rabbitmq:3.11-management
 USER root
 ARG DEBIAN_FRONTEND=noninteractive
 COPY init.sh /tmp/
@@ -7,6 +7,7 @@ RUN chmod u+x /tmp/init.sh
 RUN rabbitmq-plugins enable rabbitmq_management rabbitmq_mqtt \
 	rabbitmq_web_mqtt rabbitmq_amqp1_0 rabbitmq_prometheus \ 
 	rabbitmq_peer_discovery_consul rabbitmq_federation \
+	rabbitmq_stomp rabbitmq_web_stomp \
 	rabbitmq_federation_management rabbitmq_shovel rabbitmq_shovel_management
 
 ENTRYPOINT ["/tmp/init.sh"]
